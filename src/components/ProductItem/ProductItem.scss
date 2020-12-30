@@ -1,0 +1,14 @@
+.productItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p, span {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    img {
+        height: 4em;
+    }
+}

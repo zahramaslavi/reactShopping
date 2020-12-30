@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Products.scss';
+import ProductItem from '../../components/ProductItem/ProductItem';
 
 import { addProductToCart } from '../../actions/index';
 
@@ -11,13 +12,15 @@ class Products extends Component {
     }
 
     render() {
+        console.log("comp", this.props.products);
         return (
             <div className="products">
                 {
                     Object.keys(this.props.products).map(key => (
-                        <div key={key}>
-                            <h3>{this.props.products[key].name}</h3>
-                            <button onClick={() => this.props.addToCart(key)}>Add to cart</button>
+                        <div key={key} className="product">
+                            <ProductItem product={this.props.products[key]} showInventory="true"/>
+                            <button onClick={() => this.props.addToCart(key)} disabled={this.props.products[key].inventory < 1}>Add to cart</button>
+                            <hr />
                         </div>
                     ))
                 }

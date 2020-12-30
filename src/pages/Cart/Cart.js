@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './Cart.scss';
-
+import ProductItem from '../../components/ProductItem/ProductItem';
 import { connect } from 'react-redux';
 
-import { getCartProducts } from '../../reducers/index';
+import { getCartProducts, getTotal } from '../../reducers/index';
 import { removeProductFromCart } from '../../actions/index';
-// import { quantity } from '../../reducers/cart';
+
 
 class Cart extends Component {
 
@@ -18,12 +18,21 @@ class Cart extends Component {
         return (
             <div className="cart">
                 {this.props.addedProducts.map(item => (
-                    <div key={item.id}>
-                        <h4>{item.name}</h4>
-                        <h5>{this.props.quantityById[item.id]}</h5>
+                    <div key={item.id} className="product">
+                        <ProductItem product={item} />
+                        <span>{this.props.quantityById[item.id]} added </span>
                         <button onClick={() => this.props.removeProduct(item.id)}>Remove</button>
+                        <hr />
                     </div>
                 ))}
+                {(this.props.total > 0) ?
+                    <Fragment>
+                        <h3>Total: ${this.props.total}</h3>
+                        <button>Checkout</button>
+                    </Fragment> :
+                    <h3>No item in your cart</h3>
+                }
+                
             </div>
         );
     }
@@ -31,7 +40,8 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
     addedProducts: getCartProducts(state),
-    quantityById: state.cart.quantityById
+    quantityById: state.cart.quantityById,
+    total: getTotal(state)
 })
 
 const mapDispatchToProps = dispatch => ({

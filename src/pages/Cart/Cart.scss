@@ -1,4 +1,13 @@
 .cart {
     width: 30%;
     margin: auto;
+    text-align: left;
+
+    .product {
+        text-align: left;
+
+        button {
+            margin-left: 1em;
+        }
+    }
 }

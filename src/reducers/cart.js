@@ -1,7 +1,6 @@
 
 
 const initialState = {
-    // addedIds: [],
     quantityById: {}
 }
 
@@ -12,17 +11,14 @@ const cart = (state = initialState, action) => {
 
     switch (action.type) {
         case 'ADD_PRODUCT':
-            console.log(action);
-            // newState.addedIds.push(action.id);
             if ( !newState.quantityById[action.id] )
             {
                 
                 newState.quantityById[action.id] = 1;
-                // newState = {...newState, ...{action.id: 1}};
             } else {
                 newState.quantityById[action.id]++;
             }
-            console.log(newState.quantityById);
+            
             return newState;
         case 'REMOVE_PRODUCT':
             if ( newState.quantityById[action.id] > 1 ) {

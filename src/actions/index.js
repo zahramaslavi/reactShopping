@@ -19,10 +19,16 @@ export const getAllProducts = () => (dispatch) => {
     //on receive dispatch receiveProducts
 };
 
-export const addProductToCart = (productId) => ({
+const safelyAddProductToCart = (productId) => ({
     type: 'ADD_PRODUCT',
     id: productId
 })
+
+export const addProductToCart = (productId) => (dispatch, getState) => {
+    if (getState().products.byIds[productId].inventory > 0) {
+        dispatch(safelyAddProductToCart(productId));
+    }
+}
 
 export const removeProductFromCart = (productId) => ({
     type: 'REMOVE_PRODUCT',

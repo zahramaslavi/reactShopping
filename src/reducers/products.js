@@ -1,30 +1,25 @@
+import { combineReducers } from 'redux';
 
-const initialState = {
-    byIds: {},
-};
 
-const products = (state = initialState, action) => {
+const byIds = (state = {}, action) => {
 
     const newState = {...state};
 
     switch(action.type) {
         case 'RECEIVE_PRODUCTS':
-            console.log(action);
             return {
                 ...newState, 
-                byIds: {
-                    ...action.products.reduce((obj, product) => {
-                        obj[product.id] = product;
-                        return obj;
-                    }, {})
-                }
+                ...action.products.reduce((obj, product) => {
+                    obj[product.id] = product;
+                    return obj;
+                }, {})
             } 
         case 'ADD_PRODUCT':
-            newState.byIds[action.id].inventory --;
-
+            newState[action.id].inventory --;
+            console.log(action.type, newState[action.id])
             return newState;
         case 'REMOVE_PRODUCT':
-            newState.byIds[action.id].inventory ++;
+            newState[action.id].inventory ++;
 
             return newState;
         default: 
@@ -34,7 +29,7 @@ const products = (state = initialState, action) => {
 
 }
 
-export default products;
+export default combineReducers({byIds});
 
 export const getProduct = (id, state) => {
     console.log('id', id, state.products.byIds[id])
