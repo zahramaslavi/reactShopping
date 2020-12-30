@@ -1,0 +1,21 @@
+nav {
+
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    padding: 1.5em;
+    margin-top: 0;
+    justify-content: left;
+
+    a {
+        padding-right: .5em;
+        padding-left: .5em;
+        color: wheat;
+        text-decoration: none;
+    }
+
+    a.selected {
+        color: white;
+    }
+
+}
