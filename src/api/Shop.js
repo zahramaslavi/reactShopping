@@ -8,10 +8,15 @@ export default {
             cb(result);
         });
     },
-    buyProduct: (cb) => {
-        fetch(url + '/orders', {method: 'POST'})
-        .then((res) => {
-            cb(res);
-        });
+    buyProducts: (data, cb) => {
+        setTimeout(() => {
+            fetch(url + '/orders', {method: 'POST', body: JSON.stringify(data)})
+            .then((res) => res.json())
+            .then((result) => {
+                cb(result);
+            });
+        }, 2000) //needed to simulate some delay
+
+        
     }
 }

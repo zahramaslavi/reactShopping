@@ -1,11 +1,69 @@
 {
   "products": [
-      {"id": 1, "name": "Kayak", "category": "sport", "price": 200, "inventory": 2, "image": "https://placekitten.com/640/360"},
-      {"id": 2, "name": "Bike", "category": "sport", "price": 300, "inventory": 3, "image": "https://placekitten.com/640/360"},
-      {"id": 3, "name": "Harry Potter", "category": "books", "price": 500, "inventory": 4, "image": "https://placekitten.com/640/360"},
-      {"id": 4, "name": "Game of Thrones", "category": "books", "price": 1500, "inventory": 2, "image": "https://placekitten.com/640/360"},
-      {"id": 5, "name": "Hat", "category": "clothing", "price": 2500, "inventory": 1, "image": "https://placekitten.com/640/360"},
-      {"id": 6, "name": "Denim", "category": "clothing", "price": 530, "inventory": 6, "image": "https://placekitten.com/640/360"}
+    {
+      "id": 1,
+      "name": "Kayak",
+      "category": "sport",
+      "price": 200,
+      "inventory": 2,
+      "image": "https://placekitten.com/640/360"
+    },
+    {
+      "id": 2,
+      "name": "Bike",
+      "category": "sport",
+      "price": 300,
+      "inventory": 3,
+      "image": "https://placekitten.com/640/360"
+    },
+    {
+      "id": 3,
+      "name": "Harry Potter",
+      "category": "books",
+      "price": 500,
+      "inventory": 4,
+      "image": "https://placekitten.com/640/360"
+    },
+    {
+      "id": 4,
+      "name": "Game of Thrones",
+      "category": "books",
+      "price": 1500,
+      "inventory": 2,
+      "image": "https://placekitten.com/640/360"
+    },
+    {
+      "id": 5,
+      "name": "Hat",
+      "category": "clothing",
+      "price": 2500,
+      "inventory": 1,
+      "image": "https://placekitten.com/640/360"
+    },
+    {
+      "id": 6,
+      "name": "Denim",
+      "category": "clothing",
+      "price": 530,
+      "inventory": 6,
+      "image": "https://placekitten.com/640/360"
+    }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ]
 }

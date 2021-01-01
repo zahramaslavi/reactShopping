@@ -8,6 +8,7 @@ export default combineReducers({products, cart});
 
 
 export const getCartProducts = (state) => {
+    console.log(state.cart.quantityById);
     return Object.keys(state.cart.quantityById).map(id => getProduct(id, state));
 }
 

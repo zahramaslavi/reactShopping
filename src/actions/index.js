@@ -1,11 +1,5 @@
 import Shop from '../api/Shop';
 
-const addToCart = () => {
-    //check if it exists in the inventory
-       //we have to get the record of the product and check its inventory
-    //add product to state added product by 
-};
-
 const receiveProducts = (products) => ({
     type: 'RECEIVE_PRODUCTS',
     products: products
@@ -35,8 +29,20 @@ export const removeProductFromCart = (productId) => ({
     id: productId
 })
 
-const checkout = () => {
-    //request checkout
-    //send checkout
-    //on failure just put back the cart data 
+export const checkout = () => (dispatch, getState) => {
+    //this is just a dummy post orders - not real world
+    let orders = getState().cart.quantityById.keys;
+
+    dispatch({
+        type: 'CHECKOUT_REQUEST'
+    });
+
+    Shop.buyProducts(orders, (orders) => {
+        dispatch(checkoutSuccess());
+    });
+
 };
+
+const checkoutSuccess = () => ({
+    type: 'CHECKOUT_SUCCESS'
+})

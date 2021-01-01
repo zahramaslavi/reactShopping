@@ -4,7 +4,7 @@ import ProductItem from '../../components/ProductItem/ProductItem';
 import { connect } from 'react-redux';
 
 import { getCartProducts, getTotal } from '../../reducers/index';
-import { removeProductFromCart } from '../../actions/index';
+import { removeProductFromCart, checkout } from '../../actions/index';
 
 
 class Cart extends Component {
@@ -28,7 +28,8 @@ class Cart extends Component {
                 {(this.props.total > 0) ?
                     <Fragment>
                         <h3>Total: ${this.props.total}</h3>
-                        <button>Checkout</button>
+                        <button onClick={() => this.props.checkout()}>Checkout</button>
+                        {this.props.requesting && <h5>Requesting</h5>}
                     </Fragment> :
                     <h3>No item in your cart</h3>
                 }
@@ -41,11 +42,13 @@ class Cart extends Component {
 const mapStateToProps = state => ({
     addedProducts: getCartProducts(state),
     quantityById: state.cart.quantityById,
-    total: getTotal(state)
+    total: getTotal(state),
+    requesting: state.cart.requesting
 })
 
 const mapDispatchToProps = dispatch => ({
-    removeProduct: id => dispatch(removeProductFromCart(id))
+    removeProduct: id => dispatch(removeProductFromCart(id)),
+    checkout: () => dispatch(checkout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
