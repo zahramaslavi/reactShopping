@@ -1,23 +1,16 @@
 import { combineReducers } from 'redux';
 
-// const initialState = {
-//     quantityById: {}
-// }
-
-
-// const cart = (state = initialState, action) => {
 const quantityById = (state = {}, action) => {
 
     const newState = {...state};
 
     switch (action.type) {
         case 'ADD_PRODUCT':
-            if ( !newState[action.id] )
+            if ( !newState[action.payload.id] )
             {
-                
-                newState[action.id] = 1;
+                newState[action.payload.id] = action.payload.quantity;
             } else {
-                newState[action.id]++;
+                newState[action.payload.id] = newState[action.payload.id] + quantity;
             }
             
             return newState;

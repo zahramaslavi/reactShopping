@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import './Products.scss';
 import ProductItem from '../../components/ProductItem/ProductItem';
 
 import { addProductToCart } from '../../actions/index';
+import { quantity } from '../../reducers/cart';
 
 class Products extends Component {
 
     constructor(props) {
-        super(props);   
+        super(props);  
+        
+        this.state = {
+            quantity: 1
+        };
     }
 
     render() {
@@ -18,8 +23,7 @@ class Products extends Component {
                 {
                     Object.keys(this.props.products).map(key => (
                         <div key={key} className="product">
-                            <ProductItem product={this.props.products[key]} showInventory="true"/>
-                            <button onClick={() => this.props.addToCart(key)} disabled={this.props.products[key].inventory < 1}>Add to cart</button>
+                            <ProductItem product={this.props.products[key]} showInventory="true" handleAddToCart={(id, quantity) => this.props.addToCart(id, quantity)}/>
                             <hr />
                         </div>
                     ))
@@ -34,7 +38,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    addToCart: productId => dispatch(addProductToCart(productId))
+    addToCart: (productId, quantity) => dispatch(addProductToCart(productId, quantity))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

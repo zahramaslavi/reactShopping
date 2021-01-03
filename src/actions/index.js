@@ -13,14 +13,14 @@ export const getAllProducts = () => (dispatch) => {
     //on receive dispatch receiveProducts
 };
 
-const safelyAddProductToCart = (productId) => ({
+const safelyAddProductToCart = (productId, quantity) => ({
     type: 'ADD_PRODUCT',
-    id: productId
+    payload: {id: productId, quantity: quantity}
 })
 
-export const addProductToCart = (productId) => (dispatch, getState) => {
-    if (getState().products.byIds[productId].inventory > 0) {
-        dispatch(safelyAddProductToCart(productId));
+export const addProductToCart = (productId, quantity) => (dispatch, getState) => {
+    if (getState().products.byIds[productId].inventory >= quantity) {
+        dispatch(safelyAddProductToCart(productId, quantity));
     }
 }
 

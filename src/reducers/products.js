@@ -15,8 +15,7 @@ const byIds = (state = {}, action) => {
                 }, {})
             } 
         case 'ADD_PRODUCT':
-            newState[action.id].inventory --;
-            console.log(action.type, newState[action.id])
+            newState[action.payload.id].inventory = newState[action.payload.id].inventory - action.payload.quantity;
             return newState;
         case 'REMOVE_PRODUCT':
             newState[action.id].inventory ++;
