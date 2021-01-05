@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import './ProductItem.scss'
+import './OrderItem.scss';
+
+import ProductWrapper from '../ProductWrapper/ProductWrapper';
 
 export default function OrderItem(props) {
 
-    return (
-        <div className="orderItem">
+    const [quantity, setQuantity] = useState(1);
 
-            <h5>{props.product.name}</h5>
-            <h6> ${props.product.price}</h6>
-            {inventory()}
-            <img src={props.product.image} />
-            {/* <div className="buttons">
-                <button onClick={() => props.handleRemoveFromCart(props.product.id, quantity)} disabled={props.product.inventory < 1}>Remove</button>
+    const removeFromCart = () => {
+        props.handleRemoveProduct(quantity);
+        setQuantity(1);
+    }
+
+    return (
+        <ProductWrapper product={props.product}>
+            <div className="buttons">
+                <span>{props.quantityAdded} added </span>
+                <button onClick={() => removeFromCart()}>Remove</button>
                 {' '}
                 <input 
                     type="number" 
                     placeholder="Quantity"
-                    value={quantity} onChange={(e) => handleChangeQuantity(e.target.value)}
+                    value={quantity} 
+                    onChange={(e) => setQuantity(e.target.value)}
                     min="1"
-                    max={Number(props.product.inventory)}
+                    max={props.quantityAdded}
                 />
-            </div> */}
-        </div>
+            </div>
+            
+        </ProductWrapper>
     );
 
 }

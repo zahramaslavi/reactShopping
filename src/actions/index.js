@@ -24,10 +24,17 @@ export const addProductToCart = (productId, quantity) => (dispatch, getState) =>
     }
 }
 
-export const removeProductFromCart = (productId) => ({
+const safelyRemoveProductFromCart = (productId, quantity) => ({
     type: 'REMOVE_PRODUCT',
-    id: productId
+    payload: {id: productId, quantity: quantity} 
 })
+
+export const removeProductFromCart = (productId, quantity) => (dispatch, getState) => {
+    console.log("test", productId, quantity, getState().cart.quantityById[productId]);
+    if ( getState().cart.quantityById[productId] >= quantity ) {
+        dispatch(safelyRemoveProductFromCart(productId, quantity));
+    }
+}
 
 export const checkout = () => (dispatch, getState) => {
     //this is just a dummy post orders - not real world

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './Cart.scss';
 import ProductItem from '../../components/ProductItem/ProductItem';
+import OrderItem from '../../components/OrderItem/OrderItem';
 import { connect } from 'react-redux';
 
 import { getCartProducts, getTotal } from '../../reducers/index';
@@ -19,9 +20,12 @@ class Cart extends Component {
             <div className="cart">
                 {this.props.addedProducts.map(item => (
                     <div key={item.id} className="product">
-                        <ProductItem product={item} />
-                        <span>{this.props.quantityById[item.id]} added </span>
-                        <button onClick={() => this.props.removeProduct(item.id)}>Remove</button>
+                
+                        <OrderItem 
+                            product={item} 
+                            quantityAdded={this.props.quantityById[item.id]}
+                            handleRemoveProduct={(quantity) => this.props.removeProduct(item.id, quantity)}
+                        />
                         <hr />
                     </div>
                 ))}
@@ -47,7 +51,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    removeProduct: id => dispatch(removeProductFromCart(id)),
+    removeProduct: (id, quantity) => dispatch(removeProductFromCart(id, quantity)),
     checkout: () => dispatch(checkout())
 })
 

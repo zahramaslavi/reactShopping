@@ -8,18 +8,21 @@ const quantityById = (state = {}, action) => {
         case 'ADD_PRODUCT':
             if ( !newState[action.payload.id] )
             {
-                newState[action.payload.id] = action.payload.quantity;
+                newState[action.payload.id] = Number(action.payload.quantity);
             } else {
-                newState[action.payload.id] = newState[action.payload.id] + quantity;
+                newState[action.payload.id] = Number(newState[action.payload.id]) + Number(action.payload.quantity);
             }
             
             return newState;
         case 'REMOVE_PRODUCT':
-            if ( newState[action.id] > 1 ) {
-                newState[action.id]--;
-            } else {
-                delete newState[action.id];
+            if ( newState[action.payload.id] ) {
+                if ( newState[action.payload.id] > 1 && newState[action.payload.id] != action.payload.quantity ) {
+                    newState[action.payload.id] = Number(newState[action.payload.id]) - Number(action.payload.quantity);
+                } else {
+                    delete newState[action.payload.id];
+                }
             }
+    
             return newState;
         case 'CHECKOUT_SUCCESS':
             return {};

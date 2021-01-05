@@ -23,7 +23,9 @@ class Products extends Component {
                 {
                     Object.keys(this.props.products).map(key => (
                         <div key={key} className="product">
-                            <ProductItem product={this.props.products[key]} showInventory="true" handleAddToCart={(id, quantity) => this.props.addToCart(id, quantity)}/>
+                            <ProductItem 
+                                product={this.props.products[key]}
+                                handleAddToCart={(id, quantity) => this.props.addToCart(id, quantity)}/>
                             <hr />
                         </div>
                     ))

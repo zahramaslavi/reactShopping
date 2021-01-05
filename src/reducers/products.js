@@ -15,10 +15,10 @@ const byIds = (state = {}, action) => {
                 }, {})
             } 
         case 'ADD_PRODUCT':
-            newState[action.payload.id].inventory = newState[action.payload.id].inventory - action.payload.quantity;
+            newState[action.payload.id].inventory = Number(newState[action.payload.id].inventory) - Number(action.payload.quantity);
             return newState;
         case 'REMOVE_PRODUCT':
-            newState[action.id].inventory ++;
+            newState[action.payload.id].inventory =  Number(newState[action.payload.id].inventory)  + Number(action.payload.quantity);
 
             return newState;
         default: 
@@ -31,6 +31,5 @@ const byIds = (state = {}, action) => {
 export default combineReducers({byIds});
 
 export const getProduct = (id, state) => {
-    console.log('id', id, state.products.byIds[id])
     return state.products.byIds[id];
 }
